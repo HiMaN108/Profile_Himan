@@ -10,9 +10,8 @@ import {
   Download,
   Home,
   MessageSquare,
+  ShoppingBag,
   Trophy,
-  User,
-  Video,
 } from "lucide-react";
 import EasterEggs from "@/components/EasterEggs";
 import { navPaths, type PathId } from "@/lib/portfolio";
@@ -20,11 +19,10 @@ import { navPaths, type PathId } from "@/lib/portfolio";
 const icons = {
   brain: Brain,
   work: BriefcaseBusiness,
-  watch: Video,
-  freelancer: User,
+  armory: ShoppingBag,
   connection: MessageSquare,
   challenge: Trophy,
-} satisfies Record<PathId, typeof Brain>;
+} satisfies Record<PathId, any>;
 
 export default function PortfolioShell({
   children,

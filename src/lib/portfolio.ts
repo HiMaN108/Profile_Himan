@@ -1,8 +1,7 @@
 export type PathId =
   | "brain"
   | "work"
-  | "watch"
-  | "freelancer"
+  | "armory"
   | "connection"
   | "challenge";
 
@@ -31,20 +30,12 @@ export const navPaths: Array<{
     accent: "var(--valorant-red)",
   },
   {
-    id: "watch",
-    href: "/watch",
-    label: "Watch",
-    short: "Live desk",
-    tagline: "Creator work, learning status, and deployment pulse.",
+    id: "armory",
+    href: "/armory",
+    label: "Armory",
+    short: "Gear & Ops",
+    tagline: "Freelance contracts, YouTube intel, and experimental gear.",
     accent: "var(--amber)",
-  },
-  {
-    id: "freelancer",
-    href: "/freelancer",
-    label: "Freelancer",
-    short: "Services",
-    tagline: "Available for hire, rates, and client success stories.",
-    accent: "var(--purple)",
   },
   {
     id: "connection",
