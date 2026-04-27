@@ -1,8 +1,8 @@
+import AgentDossier from "@/components/AgentDossier";
 import ChallengeMe from "@/components/ChallengeMe";
+import MissionLogClient from "@/components/MissionLogClient";
 import PortfolioShell from "@/components/PortfolioShell";
-import ProjectMission from "@/components/ProjectMission";
 import ScrollStory from "@/components/ScrollStory";
-import { projects } from "@/lib/portfolio";
 
 export const metadata = {
   title: "Work",
@@ -13,59 +13,44 @@ export default function WorkPage() {
   return (
     <PortfolioShell>
       <main className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
-        <section className="grid gap-6 lg:grid-cols-[0.9fr_0.45fr] lg:items-end">
-          <div>
-            <p className="font-mono text-xs uppercase text-[var(--valorant-red)]">
-              Work Route
-            </p>
-            <h1 className="mt-3 text-4xl font-black sm:text-6xl">Mission board</h1>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-[var(--muted)]">
-              Projects are framed as levels so the goal, stack, status, and
-              value are easy to scan.
+        <section className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="relative">
+            <div className="flex items-center gap-3 font-mono text-[0.7rem] font-bold uppercase tracking-[0.3em] text-[var(--valorant-red)]">
+              <span className="h-1 w-1 bg-[var(--valorant-red)]" />
+              <span>Protocol // Work_Route</span>
+              <span className="h-[1px] flex-1 bg-[var(--valorant-red)]/20 max-w-[100px]" />
+            </div>
+            
+            <h1 className="mt-4 text-5xl font-black italic uppercase tracking-tighter sm:text-7xl">
+              Mission <span className="text-white/20 select-none">Board</span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--muted)]">
+              Every project is an operation. Select a mission from the roster to
+              read the full intel — videos, documents, side objectives, and
+              deployment links.
             </p>
           </div>
-          <a
-            className="theme-button-primary inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-bold"
-            href="#resume"
-          >
-            Jump to Resume Brief
-          </a>
+
+          <div className="flex gap-4">
+            <a
+              className="group relative flex h-12 items-center justify-center gap-3 overflow-hidden rounded-sm border border-[var(--valorant-red)]/30 bg-[var(--valorant-red)]/10 px-6 font-mono text-xs font-bold uppercase tracking-widest transition-all hover:bg-[var(--valorant-red)]/20"
+              href="#resume"
+            >
+              <div className="absolute inset-y-0 left-0 w-1 bg-[var(--valorant-red)] transition-transform -translate-x-full group-hover:translate-x-0" />
+              <span>Access Resume Brief</span>
+              <span className="text-[var(--valorant-red)]">»</span>
+            </a>
+          </div>
         </section>
 
-        <section className="mt-8 grid gap-4 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectMission key={project.title} project={project} />
-          ))}
-        </section>
+        {/* Split-Screen Intel Terminal */}
+        <MissionLogClient />
 
         <ScrollStory />
         <ChallengeMe />
 
-        <section
-          className="theme-panel mt-14 rounded-lg p-5 sm:p-7"
-          id="resume"
-        >
-          <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
-            <div>
-              <p className="font-mono text-xs uppercase text-[var(--amber)]">
-                Resume Brief
-              </p>
-              <h2 className="mt-3 text-3xl font-black">Why this route works</h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                ["Signal", "Projects, stack, and impact are visible without a maze."],
-                ["Speed", "Animations stay lightweight and route-scoped."],
-                ["Next Step", "Challenge UI and mission cards create natural talking points."],
-              ].map(([title, body]) => (
-                <article className="rounded-md border border-white/10 bg-white/[0.045] p-4" key={title}>
-                  <h3 className="font-black">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{body}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <AgentDossier />
       </main>
     </PortfolioShell>
   );

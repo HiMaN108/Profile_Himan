@@ -123,6 +123,43 @@ export const brainNodes = [
       "Reflexes, competition, team sense, and a taste for responsive UI.",
     tags: ["Focus", "Feedback", "Fun"],
   },
+  // New resume node
+  {
+    id: "resume",
+    label: "Resume",
+    type: "document",
+    x: 50,
+    y: 80,
+    summary: `HIMANSHU MAURYA
+Varanasi, Uttar Pradesh, 221004 India
++91 8081534758 | him2000.maurya@gmail.com
+LinkedIn | GitHub | LeetCode | Codeforces
+
+Experience
+• Junior Full Stack Developer — AscentSpark Private Limited (Nov ’25 – Present)
+  • Developed scalable backend services and REST APIs for the Tutopia Learning Platform (1M+ downloads) using Next.js and Laravel APIs.
+  • Integrated real‑time communication systems using Amazon Chime SDK, improving session reliability to 99.9%.
+  • Optimized performance by ~30% with TanStack Query and caching, reducing redundant API calls by ~35%.
+  • Built low‑latency 1:1 Quick Live sessions with LiveKit, cutting join time by ~40%.
+• Software Developer Intern — Innovilla Private Limited (Jun ’25 – Oct ’25)
+  • Developed scalable features for Sellio using Next.js and Laravel.
+  • Automated logistics with Delhivery API, implemented Razorpay payment system, and built a zone‑based delivery routing system.
+  • Created a Flutter delivery app with real‑time tracking and rider KYC.
+• Research Intern — IIT BHU & IIIT Kottayam (May ’23 – Mar ’25)
+  • Built IoT + MERN systems on Raspberry Pi, improving decision‑making speed by 40% and crop yield by 50%.
+
+Skills
+Languages: C++, JavaScript, PHP, SQL
+Backend: Laravel, Node.js, REST APIs, Authentication
+Frontend: Next.js, React.js, HTML, Tailwind CSS
+Databases: MySQL, PostgreSQL, MongoDB
+Tools: Git, Postman, Flutter
+Core Concepts: Data Structures, Algorithms, OS, Networks, OOP
+
+Education
+• B.Tech in Information Technology, UIET, Kanpur (2020 – 2024)`,
+    tags: ["Experience", "Education", "Skills"],
+  },
 ];
 
 export const brainLinks = [
@@ -130,7 +167,7 @@ export const brainLinks = [
   ["core", "backend"],
   ["core", "systems"],
   ["core", "creator"],
-  ["core", "gaming"],
+  ["core", "resume"], // link to resume node
   ["dsa", "backend"],
   ["backend", "systems"],
   ["creator", "gaming"],
@@ -195,24 +232,24 @@ export const projects: Project[] = [
 
 export const storyBeats = [
   {
-    kicker: "Spawn",
-    title: "Start with signal, not spectacle.",
-    body: "The entry screen earns attention quickly, then gets out of the way so a recruiter can jump straight to work.",
+    kicker: "Phase 01: Hardware Uplink",
+    title: "Bridging Code and Reality",
+    body: "My journey started by stepping out of the browser. During my research stints at IIIT Kottayam and IIT BHU, I learned that software is powerful, but hardware brings it to life. From programming Raspberry Pi sensors for smart agriculture to developing optical STEM toys, I proved I can engineer across the physical tech stack.",
   },
   {
-    kicker: "Loadout",
-    title: "Translate skills into proof.",
-    body: "Each project reads like a mission: goal, stack, status, and the decision-making behind it.",
+    kicker: "Phase 02: Firewall Breach",
+    title: "Securing the Network",
+    body: "Building physical systems is only half the battle; defending them is the other. For my B.Tech Capstone, I dove deep into cybersecurity. I researched and simulated IP-based DDoS attacks, utilizing Wireshark and machine learning heuristics to detect and mitigate emerging network threats.",
   },
   {
-    kicker: "Clutch",
-    title: "Show how the mind moves.",
-    body: "The brain route connects algorithms, backend thinking, creator work, and play into one coherent map.",
+    kicker: "Phase 03: The Full Stack Evolution",
+    title: "Scaling for the Web",
+    body: "With a solid foundation in hardware and security, I transitioned into the trenches of web development as a Junior Full Stack Developer at AscentSpark and an Intern at Innovilla. Here, I learned to build highly scalable web architectures, optimize e-commerce platforms like Sellio, and handle real-world backend complexities.",
   },
   {
-    kicker: "Extract",
-    title: "Leave with a next action.",
-    body: "Resume, projects, live stats, and challenge input stay close enough that the adventure remains practical.",
+    kicker: "Phase 04: Next Mission",
+    title: "Ready for Deployment",
+    body: "Today, I combine my full-stack engineering speed with my research-driven problem-solving skills. Whether it's building a complex Next.js interface, architecting a secure backend, or optimizing a database, I am fully equipped and ready for the next high-stakes mission.",
   },
 ];
 
