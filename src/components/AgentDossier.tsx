@@ -88,11 +88,6 @@ export default function AgentDossier() {
 
         {/* Column 3: Intel Access */}
         <div className="relative flex flex-col gap-8 rounded-sm border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent p-8 lg:justify-between">
-          {/* Run Ball Icon (Centered Background) */}
-          <div className="absolute left-1/2 top-[50%] h-48 w-48 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <Lottie animationData={runBallData} loop autoplay />
-          </div>
-
           <div className="relative z-10">
             <div className="mb-4 flex items-center gap-2 font-mono text-[0.7rem] font-bold uppercase tracking-[0.4em] text-white/40">
                <span className="animate-pulse">●</span>
@@ -103,11 +98,16 @@ export default function AgentDossier() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          {/* Run Ball Icon (Natural Flex Position) */}
+          <div className="relative mx-auto h-36 w-36 flex items-center justify-center pointer-events-none z-10">
+            <Lottie animationData={runBallData} loop autoplay />
+          </div>
+
+          <div className="flex flex-col gap-4 relative z-10">
             <a 
-              href="/resume.pdf" 
+              href="/images/HimanshuResume.pdf" 
               download="Himanshu_Maurya_Resume.pdf" 
-              className="group relative flex h-16 items-center justify-center gap-3 overflow-hidden rounded-sm bg-white transition-all hover:scale-[1.02] active:scale-95"
+              className="group relative flex h-16 items-center justify-center gap-3 overflow-hidden rounded-sm bg-white transition-all hover:scale-[1.02] active:scale-95 z-10"
             >
               <span className="relative z-10 text-[0.7rem] font-black uppercase tracking-[0.3em] text-black">Download Resume</span>
               <div className="absolute inset-0 -translate-x-full bg-[var(--valorant-red)] transition-transform group-hover:translate-x-0" />

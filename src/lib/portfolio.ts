@@ -2,8 +2,7 @@ export type PathId =
   | "brain"
   | "work"
   | "armory"
-  | "connection"
-  | "challenge";
+  | "connection";
 
 export const navPaths: Array<{
   id: PathId;
@@ -44,14 +43,6 @@ export const navPaths: Array<{
     short: "Network",
     tagline: "Let's collaborate, chat, or build something together.",
     accent: "var(--pink)",
-  },
-  {
-    id: "challenge",
-    href: "/challenge",
-    label: "Challenge",
-    short: "Arena",
-    tagline: "Interactive puzzles, experiments, and hidden unlocks.",
-    accent: "var(--green)",
   },
 ];
 

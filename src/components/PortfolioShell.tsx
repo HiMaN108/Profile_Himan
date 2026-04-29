@@ -21,7 +21,6 @@ const icons = {
   work: BriefcaseBusiness,
   armory: ShoppingBag,
   connection: MessageSquare,
-  challenge: Trophy,
 } satisfies Record<PathId, any>;
 
 export default function PortfolioShell({
@@ -103,15 +102,16 @@ export default function PortfolioShell({
             })}
           </nav>
 
-          {/* Action: Dossier */}
-          <Link
-            className="group relative flex h-11 items-center justify-center gap-3 overflow-hidden rounded-sm bg-white px-5 text-black transition-all hover:scale-105 active:scale-95 hidden sm:flex"
-            href="/work#resume"
+          {/* Action: Resume Download */}
+          <a
+            className="group relative flex h-11 items-center justify-center gap-2.5 overflow-hidden rounded-sm bg-white px-3 sm:px-5 text-black transition-all hover:scale-105 active:scale-95"
+            href="/images/HimanshuResume.pdf"
+            download="Himanshu_Maurya_Resume.pdf"
           >
             <div className="absolute inset-0 translate-x-[-100%] bg-[var(--valorant-red)] transition-transform group-hover:translate-x-0" />
-            <span className="relative z-10 font-mono text-[0.65rem] font-black uppercase tracking-[0.2em] group-hover:text-white transition-colors">Resume</span>
+            <span className="relative z-10 font-mono text-[0.65rem] font-black uppercase tracking-[0.2em] group-hover:text-white transition-colors hidden sm:block">Resume</span>
             <Download className="relative z-10 size-3.5 group-hover:text-white transition-colors" aria-hidden="true" />
-          </Link>
+          </a>
         </div>
       </header>
       {children}
