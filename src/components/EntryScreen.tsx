@@ -2,7 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  animate,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import {
   Brain,
   BriefcaseBusiness,
@@ -22,6 +28,40 @@ const messages = [
   "Ready",
 ];
 
+const heroStats = [
+  { label: "Users Impacted", value: 1, suffix: "M+" },
+  { label: "System Reliability", value: 99.9, suffix: "%", decimals: 1 },
+  { label: "Performance Gain", value: 30, suffix: "%+" },
+  { label: "Projects Delivered", value: 4, suffix: "+" },
+];
+
+function CountingStatValue({
+  value,
+  suffix = "",
+  decimals = 0,
+}: {
+  value: number;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const count = useMotionValue(0);
+  const displayed = useTransform(count, (latest) => {
+    const number = decimals > 0 ? latest.toFixed(decimals) : Math.round(latest);
+    return `${number}${suffix}`;
+  });
+
+  useEffect(() => {
+    const controls = animate(count, value, {
+      duration: 1.8,
+      ease: "easeOut",
+    });
+
+    return controls.stop;
+  }, [count, value]);
+
+  return <motion.span>{displayed}</motion.span>;
+}
+
 export default function EntryScreen() {
   const [line, setLine] = useState(0);
   const [typed, setTyped] = useState("");
@@ -30,6 +70,9 @@ export default function EntryScreen() {
   const [taglineTyped, setTaglineTyped] = useState("");
   const taglineText = "I follow patterns, not time.";
   const [showTagline, setShowTagline] = useState(false);
+  const brandText = "STOPHERMEDIA";
+  const [showBrand, setShowBrand] = useState(false);
+  const [brandTyped, setBrandTyped] = useState("");
 
   useEffect(() => {
     if (bootDone) {
@@ -61,8 +104,6 @@ export default function EntryScreen() {
 
   useEffect(() => {
     if (!bootDone) {
-      setShowTagline(false);
-      setTaglineTyped("");
       return;
     }
 
@@ -75,7 +116,6 @@ export default function EntryScreen() {
 
   useEffect(() => {
     if (!showTagline) {
-      setTaglineTyped("");
       return;
     }
 
@@ -87,6 +127,20 @@ export default function EntryScreen() {
       return () => clearTimeout(timer);
     }
   }, [showTagline, taglineTyped, taglineText]);
+
+  useEffect(() => {
+    if (!showBrand) {
+      return;
+    }
+
+    if (brandTyped.length < brandText.length) {
+      const timer = window.setTimeout(() => {
+        setBrandTyped(brandText.slice(0, brandTyped.length + 1));
+      }, 76);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showBrand, brandTyped, brandText]);
 
   const renderedLines = useMemo(() => {
     const complete = messages.slice(0, line);
@@ -141,15 +195,28 @@ export default function EntryScreen() {
           </motion.div>
           <motion.h1
             className="text-balance text-5xl font-black leading-none sm:text-6xl lg:text-7xl"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08 }}
+            initial={{ opacity: 0, y: 18, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.08, duration: 0.65, ease: "easeOut" }}
+            onAnimationComplete={() => setShowBrand(true)}
           >
             Himanshu
             <span className="block text-[var(--valorant-red)]">
               Pattern Seeker
             </span>
           </motion.h1>
+          <motion.p
+            className="mt-3 min-h-6 font-mono text-sm font-bold uppercase tracking-[0.25em] text-[var(--amber)] sm:text-base"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showBrand ? 1 : 0 }}
+          >
+            {brandTyped}
+            {showBrand && (
+              <span className={showCursor ? "opacity-100" : "opacity-0"}>
+                _
+              </span>
+            )}
+          </motion.p>
           <motion.p
             className="mt-3 font-mono text-sm text-[var(--cyan)]"
             initial={{ opacity: 0 }}
@@ -183,29 +250,28 @@ export default function EntryScreen() {
             </Link>
           </div>
 
-          {/* <motion.div
+          <motion.div
             className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.24 }}
           >
-            {[
-              { label: "Users Impacted", value: "1M+" },
-              { label: "System Reliability", value: "99.9%" },
-              { label: "Performance Gain", value: "30%+" },
-              { label: "Real-time Systems", value: "Expert" },
-            ].map((stat) => (
+            {heroStats.map((stat) => (
               <div
                 key={stat.label}
                 className="rounded-md border border-white/10 bg-white/[0.045] p-3 text-center"
               >
                 <p className="text-xl font-black text-[var(--valorant-red)]">
-                  {stat.value}
+                  <CountingStatValue
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    decimals={stat.decimals}
+                  />
                 </p>
                 <p className="mt-1 text-xs text-[var(--muted)]">{stat.label}</p>
               </div>
             ))}
-          </motion.div> */}
+          </motion.div>
         </div>
 
         <motion.div
