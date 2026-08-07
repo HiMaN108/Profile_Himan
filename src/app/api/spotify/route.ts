@@ -1,72 +1,71 @@
 import { NextResponse } from "next/server";
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+export const dynamic = "force-dynamic";
 
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+const clientId = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
-const getAccessToken = async () => {
-  const response = await fetch(TOKEN_ENDPOINT, {
+async function getAccessToken() {
+  const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
-      Authorization: `Basic ${basic}`,
+      Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
       grant_type: "refresh_token",
-      refresh_token: refresh_token || "",
+      refresh_token: refreshToken || "",
     }),
-    next: { revalidate: 3600 } // cache token for 1 hour
   });
 
-  return response.json();
-};
+  const data = await response.json();
+  return data.access_token as string | undefined;
+}
 
 export async function GET() {
-  if (!refresh_token) {
-    return NextResponse.json({ isPlaying: false, message: "No refresh token available." });
+  if (!clientId || !clientSecret || !refreshToken) {
+    return NextResponse.json({ isPlaying: false });
   }
 
   try {
-    const { access_token } = await getAccessToken();
+    const accessToken = await getAccessToken();
 
-    const response = await fetch(NOW_PLAYING_ENDPOINT, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
+    if (!accessToken) {
+      return NextResponse.json({ isPlaying: false });
+    }
+
+    const response = await fetch(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-      next: { revalidate: 30 } // revalidate every 30 seconds
-    });
+    );
 
-    if (response.status === 204 || response.status > 400) {
+    if (response.status === 204 || !response.ok) {
       return NextResponse.json({ isPlaying: false });
     }
 
-    const song = await response.json();
+    const data = await response.json();
 
-    if (song.item === null) {
+    if (!data.item) {
       return NextResponse.json({ isPlaying: false });
     }
-
-    const isPlaying = song.is_playing;
-    const title = song.item.name;
-    const artist = song.item.artists.map((_artist: any) => _artist.name).join(", ");
-    const album = song.item.album.name;
-    const albumImageUrl = song.item.album.images[0].url;
-    const songUrl = song.item.external_urls.spotify;
 
     return NextResponse.json({
-      isPlaying,
-      title,
-      artist,
-      album,
-      albumImageUrl,
-      songUrl,
+      isPlaying: data.is_playing,
+      title: data.item.name,
+      artist: data.item.artists
+        .map((artist: { name: string }) => artist.name)
+        .join(", "),
+      album: data.item.album.name,
+      albumImageUrl: data.item.album.images?.[0]?.url,
+      songUrl: data.item.external_urls?.spotify,
     });
   } catch (error) {
-    console.error("Spotify API Error:", error);
-    return NextResponse.json({ isPlaying: false, error: "Failed to fetch Spotify data" });
+    console.error("Spotify API error:", error);
+    return NextResponse.json({ isPlaying: false });
   }
 }

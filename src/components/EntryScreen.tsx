@@ -70,9 +70,6 @@ export default function EntryScreen() {
   const [taglineTyped, setTaglineTyped] = useState("");
   const taglineText = "I follow patterns, not time.";
   const [showTagline, setShowTagline] = useState(false);
-  const brandText = "STOPHERMEDIA";
-  const [showBrand, setShowBrand] = useState(false);
-  const [brandTyped, setBrandTyped] = useState("");
 
   useEffect(() => {
     if (bootDone) {
@@ -127,20 +124,6 @@ export default function EntryScreen() {
       return () => clearTimeout(timer);
     }
   }, [showTagline, taglineTyped, taglineText]);
-
-  useEffect(() => {
-    if (!showBrand) {
-      return;
-    }
-
-    if (brandTyped.length < brandText.length) {
-      const timer = window.setTimeout(() => {
-        setBrandTyped(brandText.slice(0, brandTyped.length + 1));
-      }, 76);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showBrand, brandTyped, brandText]);
 
   const renderedLines = useMemo(() => {
     const complete = messages.slice(0, line);
@@ -198,25 +181,12 @@ export default function EntryScreen() {
             initial={{ opacity: 0, y: 18, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.08, duration: 0.65, ease: "easeOut" }}
-            onAnimationComplete={() => setShowBrand(true)}
           >
             Himanshu
             <span className="block text-[var(--valorant-red)]">
               Pattern Seeker
             </span>
           </motion.h1>
-          <motion.p
-            className="mt-3 min-h-6 font-mono text-sm font-bold uppercase tracking-[0.25em] text-[var(--amber)] sm:text-base"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showBrand ? 1 : 0 }}
-          >
-            {brandTyped}
-            {showBrand && (
-              <span className={showCursor ? "opacity-100" : "opacity-0"}>
-                _
-              </span>
-            )}
-          </motion.p>
           <motion.p
             className="mt-3 font-mono text-sm text-[var(--cyan)]"
             initial={{ opacity: 0 }}

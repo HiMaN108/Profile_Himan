@@ -17,14 +17,16 @@ export type ArmoryItem = {
 export const armoryItems: ArmoryItem[] = [
   // Freelance
   {
-    id: "newhive-cafe",
-    title: "newHive.co.in",
+    id: "stophermedia",
+    title: "StopherMedia",
     type: "Freelance",
-    status: "INITIAL_PHASE",
-    brief: "Developing a modern digital presence for a local cafe. Focused on aesthetic brand identity, menu visualization, and localized customer engagement.",
-    tech: ["Next.js", "Tailwind", "Responsive Design"],
+    status: "ACTIVE",
+    brief:
+      "We're your outsourced team for media, content, design, and website support — delivered by a dedicated remote team. No hiring. No overhead. Just execution.",
+    tech: ["Next.js", "Tailwind", "Content Systems"],
     accent: "var(--cyan)",
-    link: "https://newhive.co.in",
+    link: "https://stophermedia.vercel.app/",
+    companyLink: "https://stophermedia.vercel.app/",
   },
 
   // Assignments / Tactical
@@ -33,13 +35,14 @@ export const armoryItems: ArmoryItem[] = [
     title: "Interactive Wall Calendar",
     type: "Assignment",
     status: "COMPLETED",
-    brief: "A high-fidelity frontend assignment for takeUforward. Features a fully interactive wall calendar with integrated sticky notes, state persistence, and a custom design system.",
+    brief:
+      "A high-fidelity frontend assignment for takeUforward. Features a fully interactive wall calendar with integrated sticky notes, state persistence, and a custom design system.",
     tech: ["Next.js", "TailwindCSS", "Lucide React"],
     accent: "var(--violet)",
     link: "https://takeu-forward-frontend-assignment.vercel.app/",
     companyLink: "https://takeuforward.org/",
     logo: "/images/takeUForward_logo.png",
-    timeline: "4 Hours"
+    timeline: "4 Hours",
   },
 
   // Business (Banarasi Saree)
@@ -48,7 +51,8 @@ export const armoryItems: ArmoryItem[] = [
     title: "Varanasi Silk Hub",
     type: "Business",
     status: "MISSION_PLANNING",
-    brief: "Launching traditional Banarasi Saree artistry on the Amazon India marketplace. Managing domestic supply chains and local artisan sourcing for the Indian market.",
+    brief:
+      "Launching traditional Banarasi Saree artistry on the Amazon India marketplace. Managing domestic supply chains and local artisan sourcing for the Indian market.",
     tech: ["Marketplace Strategy", "Domestic Logistics", "Indian Sourcing"],
     accent: "var(--valorant-red)",
   },
@@ -61,6 +65,7 @@ export const youtubeStats = {
     title: "How I built a Tactical Portfolio with Next.js",
     views: "2.5K",
     date: "2 days ago",
-    thumbnail: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=2070&auto=format&fit=crop",
-  }
+    thumbnail:
+      "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=2070&auto=format&fit=crop",
+  },
 };
